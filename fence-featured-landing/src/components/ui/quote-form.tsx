@@ -6,6 +6,15 @@ import { X } from "lucide-react";
 import { useState, useEffect } from "react";
 import emailjs from '@emailjs/browser';
 
+// Initialize EmailJS with the public key
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+
+if (EMAILJS_PUBLIC_KEY) {
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+}
+
 export function QuoteForm() {
   const [formData, setFormData] = useState({
     name: '',
@@ -15,21 +24,13 @@ export function QuoteForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  // Initialize EmailJS with the public key
-  useEffect(() => {
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-    if (publicKey) {
-      emailjs.init(publicKey);
-    }
-  }, []);
-
   // Log environment variables in development
   useEffect(() => {
     if (import.meta.env.DEV) {
       console.log('EmailJS Config:', {
-        serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+        serviceId: EMAILJS_SERVICE_ID,
+        templateId: EMAILJS_TEMPLATE_ID,
+        publicKey: EMAILJS_PUBLIC_KEY,
       });
     }
   }, []);
@@ -112,16 +113,13 @@ export function QuoteForm() {
     setSubmitStatus('idle');
 
     try {
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-
-      if (!serviceId || !templateId) {
+      if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
         throw new Error('EmailJS configuration is missing');
       }
 
       await emailjs.send(
-        serviceId,
-        templateId,
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
         {
           customer_name: formData.name,
           customer_phone: formData.phone,
