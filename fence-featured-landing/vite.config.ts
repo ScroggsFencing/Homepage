@@ -5,7 +5,7 @@ import { securityHeadersPlugin } from "./src/security/vite-security-headers";
 
 // https://vitejs.dev/config/
 // Configured for GitHub Pages deployment at scroggsfencing.github.io/Homepage
-// Testing connection and GitHub Actions workflow
+// Configured with EmailJS for contact form functionality
 export default defineConfig(({ mode }) => {
   // Load env file based on `mode` in the current working directory.
   const env = loadEnv(mode, process.cwd(), '');
