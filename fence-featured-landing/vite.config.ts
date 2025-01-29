@@ -10,6 +10,14 @@ export default defineConfig(({ mode }) => {
   // Load env file based on `mode` in the current working directory.
   const env = loadEnv(mode, process.cwd(), '');
   
+  // Debug log for build process
+  console.log('Build Mode:', mode);
+  console.log('Environment Variables Present:', {
+    SERVICE_ID: !!process.env.VITE_EMAILJS_SERVICE_ID || !!env.VITE_EMAILJS_SERVICE_ID,
+    TEMPLATE_ID: !!process.env.VITE_EMAILJS_TEMPLATE_ID || !!env.VITE_EMAILJS_TEMPLATE_ID,
+    PUBLIC_KEY: !!process.env.VITE_EMAILJS_PUBLIC_KEY || !!env.VITE_EMAILJS_PUBLIC_KEY,
+  });
+  
   return {
     base: './',
     server: {
@@ -28,9 +36,9 @@ export default defineConfig(({ mode }) => {
     },
     define: {
       // Expose env variables on import.meta.env
-      'import.meta.env.VITE_EMAILJS_SERVICE_ID': JSON.stringify(process.env.VITE_EMAILJS_SERVICE_ID || env.VITE_EMAILJS_SERVICE_ID),
-      'import.meta.env.VITE_EMAILJS_TEMPLATE_ID': JSON.stringify(process.env.VITE_EMAILJS_TEMPLATE_ID || env.VITE_EMAILJS_TEMPLATE_ID),
-      'import.meta.env.VITE_EMAILJS_PUBLIC_KEY': JSON.stringify(process.env.VITE_EMAILJS_PUBLIC_KEY || env.VITE_EMAILJS_PUBLIC_KEY),
+      'import.meta.env.VITE_EMAILJS_SERVICE_ID': JSON.stringify(process.env.VITE_EMAILJS_SERVICE_ID || env.VITE_EMAILJS_SERVICE_ID || ''),
+      'import.meta.env.VITE_EMAILJS_TEMPLATE_ID': JSON.stringify(process.env.VITE_EMAILJS_TEMPLATE_ID || env.VITE_EMAILJS_TEMPLATE_ID || ''),
+      'import.meta.env.VITE_EMAILJS_PUBLIC_KEY': JSON.stringify(process.env.VITE_EMAILJS_PUBLIC_KEY || env.VITE_EMAILJS_PUBLIC_KEY || ''),
     },
   };
 });
