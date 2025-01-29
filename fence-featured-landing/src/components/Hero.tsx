@@ -107,13 +107,18 @@ const Hero = () => {
               </BlurFade>
               <div className="space-y-6">
                 <BlurFade delay={0.5}>
-                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-white">
+                  <div className="flex flex-col items-center justify-center gap-4 text-white">
                     <div className="bg-amber-500 text-slate-900 p-3 rounded-full">
                       <Phone className="w-6 h-6" />
                     </div>
-                    <a href="tel:+1-806-555-0123" className="font-['Barlow_Semi_Condensed'] text-xl sm:text-2xl hover:text-amber-500 transition-colors">
-                      (806) 555-0123
-                    </a>
+                    <div className="flex flex-col items-center gap-2">
+                      <a href="tel:+1-806-382-3956" className="font-['Barlow_Semi_Condensed'] text-xl sm:text-2xl hover:text-amber-500 transition-colors text-center">
+                        David Scroggs<br />(806) 382-3956
+                      </a>
+                      <a href="tel:+1-806-382-3380" className="font-['Barlow_Semi_Condensed'] text-xl sm:text-2xl hover:text-amber-500 transition-colors text-center">
+                        Alicia Scroggs<br />(806) 382-3380
+                      </a>
+                    </div>
                   </div>
                 </BlurFade>
                 <BlurFade delay={0.75}>
