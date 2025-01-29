@@ -23,8 +23,13 @@ const Navbar = () => {
     <nav className="fixed w-full z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 pt-[env(safe-area-inset-top)] pb-2">
       <div className="max-w-7xl mx-auto px-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))]">
         <div className="flex justify-between items-center py-4">
-          <div className="flex items-center">
+          <div className="flex items-center gap-2">
             <span className="text-2xl font-bold text-foreground font-['Barlow_Semi_Condensed']">Scroggs Fencing</span>
+            <img 
+              src="images/navLogo.png" 
+              alt="Scroggs Fencing Logo" 
+              className="h-8 w-auto object-contain"
+            />
           </div>
 
           {/* Desktop Navigation */}
