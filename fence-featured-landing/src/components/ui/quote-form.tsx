@@ -7,7 +7,12 @@ import { useState, useEffect } from "react";
 import emailjs from '@emailjs/browser';
 
 // Initialize EmailJS with the public key
-emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+useEffect(() => {
+  const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+  if (publicKey) {
+    emailjs.init(publicKey);
+  }
+}, []);
 
 export function QuoteForm() {
   const [formData, setFormData] = useState({
