@@ -6,14 +6,6 @@ import { X } from "lucide-react";
 import { useState, useEffect } from "react";
 import emailjs from '@emailjs/browser';
 
-// Initialize EmailJS with the public key
-useEffect(() => {
-  const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-  if (publicKey) {
-    emailjs.init(publicKey);
-  }
-}, []);
-
 export function QuoteForm() {
   const [formData, setFormData] = useState({
     name: '',
@@ -22,6 +14,14 @@ export function QuoteForm() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  // Initialize EmailJS with the public key
+  useEffect(() => {
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    if (publicKey) {
+      emailjs.init(publicKey);
+    }
+  }, []);
 
   // Log environment variables in development
   useEffect(() => {
